@@ -13,8 +13,7 @@ Para instalar la aplicación en tu dispositivo Android, sigue estos pasos:
 
 1. Descarga el archivo APK desde el enlace proporcionado.
 2. Abre el archivo APK en tu dispositivo.
-3. Si es la primera vez que instalas una aplicación de esta fuente, es posible que necesites habilitar la opción "Instalar de fuentes desconocidas" en la configuración de seguridad de tu dispositivo.
-4. Sigue las instrucciones en pantalla para completar la instalación.
+3. Sigue las instrucciones en pantalla para completar la instalación.
 
 ## Capturas de Pantalla
 Puedes consultar las capturas de pantalla de la aplicación en el siguiente enlace:
