@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Registro de Usuarios',
+      title: 'Registro de Usuario',
       theme: AppTheme().theme(),
       home: UserScreen(),
     );

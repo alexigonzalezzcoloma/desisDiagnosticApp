@@ -10,19 +10,23 @@ class UserTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return users.isEmpty
         ? Center(child: Text('No hay usuarios registrados'))
-        : DataTable(
-            columns: [
-              DataColumn(label: Text('Nombre')),
-              DataColumn(label: Text('Email')),
-              DataColumn(label: Text('Fecha de Nacimiento')),
-            ],
-            rows: users.map((user) {
-              return DataRow(cells: [
-                DataCell(Text(user.name)),
-                DataCell(Text(user.email)),
-                DataCell(Text(user.birthDate.toLocal().toString().split(' ')[0])),
-              ]);
-            }).toList(),
+        : SingleChildScrollView(
+            scrollDirection: Axis.horizontal,  // Permite desplazamiento horizontal
+            child: DataTable(
+              columns: [
+                DataColumn(label: Text('Nombre')),
+                DataColumn(label: Text('Email')),
+                DataColumn(label: Text('Fecha de Nacimiento')),
+              ],
+              rows: users.map((user) {
+                return DataRow(cells: [
+                  DataCell(Text(user.name)),
+                  DataCell(Text(user.email)),
+                  DataCell(Text(user.birthDate.toLocal().toString().split(' ')[0])),
+                ]);
+              }).toList(),
+            ),
           );
   }
 }
+

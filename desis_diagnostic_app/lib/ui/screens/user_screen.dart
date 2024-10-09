@@ -44,7 +44,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Registro de Usuarios')),
+      appBar:  AppBar(title: Text('Registro de Usuario')),
       body: Column(
         children: [
           SignupForm(
