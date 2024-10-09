@@ -1,12 +1,12 @@
 import 'package:desis_diagnostic_app/api/models/user.model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Asegúrate de tener esta importación
 
 /// UserTable es un widget que muestra una tabla de usuarios
 /// en un formato de tabla de datos (DataTable). Permite el
 /// desplazamiento horizontal y vertical, y asegura que el contenido
 /// de cada celda no se desborde, sino que sea desplazable.
-///
-///
+
 class UserTable extends StatelessWidget {
   final List<User> users;
 
@@ -45,7 +45,8 @@ class UserTable extends StatelessWidget {
                     DataCell(
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal, // Desplazamiento horizontal dentro de la celda
-                        child: Text(user.birthDate.toLocal().toString().split(' ')[0]), // Fecha de nacimiento del usuario.
+                        child: Text(DateFormat('dd/MM/yyyy').format(user.birthDate.toLocal())), // Fecha de nacimiento en formato chileno.
+
                       ),
                     ),
                   ]);
