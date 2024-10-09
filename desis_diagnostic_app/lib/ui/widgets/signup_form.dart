@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import '../validators/signup_validators.dart';  // Importa la clase de validaciones
+import '../validators/signup_validators.dart'; // Importa la clase de validaciones
 
+/// SignupForm es un widget que representa un formulario de registro de usuario.
+/// Permite la entrada de los datos del usuario y la validación de estos
+/// Ademas puede obtener datos aleatorios de un API para rellenar los campos
+///
 class SignupForm extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
-  final void Function(String, String, String, String, String) onSubmit;
+  final GlobalKey<FormState>
+      formKey; // Clave para el formulario, utilizada para validación.
+  final void Function(String, String, String, String, String)
+      onSubmit; // Callback para manejar el envío de datos.
 
   SignupForm({required this.formKey, required this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
+    // Controladores de texto para cada campo del formulario
     final TextEditingController nameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController birthdateController = TextEditingController();
@@ -21,7 +28,7 @@ class SignupForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
-        key: formKey,
+        key: formKey, // Asigna la clave del formulario para validación.
         child: Column(
           children: [
             TextFormField(
@@ -30,13 +37,14 @@ class SignupForm extends StatelessWidget {
             ),
             TextFormField(
               controller: emailController,
-              decoration: const InputDecoration(labelText: 'Correo Electrónico'),
+              decoration: const InputDecoration(labelText: 'Correo'),
             ),
             TextFormField(
               controller: birthdateController,
-              decoration: const InputDecoration(labelText: 'Fecha de Nacimiento'),
+              decoration: const InputDecoration(labelText: 'Fecha Nacimiento'),
               readOnly: true,
               onTap: () async {
+                // Selector de fecha al tocar sobre en el campo fecha
                 DateTime? pickedDate = await showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
@@ -45,7 +53,9 @@ class SignupForm extends StatelessWidget {
                 );
 
                 if (pickedDate != null) {
-                  birthdateController.text = pickedDate.toLocal().toString().split(' ')[0];
+                  // Formato de la fecha seleccionada
+                  birthdateController.text =
+                      pickedDate.toLocal().toString().split(' ')[0];
                 }
               },
             ),
@@ -59,6 +69,7 @@ class SignupForm extends StatelessWidget {
               obscureText: true,
             ),
             ElevatedButton(
+              // Botón para registrar el usuario
               onPressed: () {
                 _validateAndSubmit(
                   context,
@@ -73,8 +84,10 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
+              // Botón para obtener datos aleatorios desde una API
               onPressed: () async {
-                await _fetchDataFromAPI(nameController, emailController, birthdateController, addressController, passwordController);
+                await _fetchDataFromAPI(nameController, emailController,
+                    birthdateController, addressController, passwordController);
               },
               child: const Text('Obtener desde API'),
             ),
@@ -84,6 +97,7 @@ class SignupForm extends StatelessWidget {
     );
   }
 
+  /// Método para obtener datos de un API y rellenar el formulario.
   Future<void> _fetchDataFromAPI(
       TextEditingController nameController,
       TextEditingController emailController,
@@ -91,11 +105,15 @@ class SignupForm extends StatelessWidget {
       TextEditingController addressController,
       TextEditingController passwordController) async {
     try {
-      final response = await http.get(Uri.parse('https://randomuser.me/api/'));
+      final response = await http
+          .get(Uri.parse('https://randomuser.me/api/')); // Llamada a la API
 
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+        final data =
+            json.decode(response.body); // Decodificación de la respuesta
         final user = data['results'][0];
+        
+        // Rellenar los campos del formulario con los datos obtenidos y adecuarlos al modelo de datos manejado
 
         nameController.text = '${user['name']['first']} ${user['name']['last']}';
         emailController.text = '${user['email']}';
@@ -103,7 +121,7 @@ class SignupForm extends StatelessWidget {
         DateTime birthdate = DateTime.parse(user['dob']['date']);
         birthdateController.text = DateFormat('yyyy-MM-dd').format(birthdate);
 
-        addressController.text = '${user['location']['street']['number']} ${user['location']['street']['name']}, ${user['location']['city']}, ${user['location']['country']}';
+        addressController.text ='${user['location']['street']['number']} ${user['location']['street']['name']}, ${user['location']['city']}, ${user['location']['country']}';
         passwordController.text = '${user['login']['password']}';
       } else {
         print('Error al obtener datos: ${response.statusCode}');
@@ -113,7 +131,8 @@ class SignupForm extends StatelessWidget {
     }
   }
 
-  void _showAlertDialog(BuildContext context,String title, String message) {
+    /// Metodo que muestra un cuadro de diálogo con un mensaje de alerta.
+  void _showAlertDialog(BuildContext context, String title, String message) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -131,6 +150,8 @@ class SignupForm extends StatelessWidget {
     );
   }
 
+  /// Metodo que valida los campos del formulario y llama a la función de envío si son válidos.
+
   void _validateAndSubmit(
       BuildContext context,
       TextEditingController nameController,
@@ -138,46 +159,54 @@ class SignupForm extends StatelessWidget {
       TextEditingController birthdateController,
       TextEditingController addressController,
       TextEditingController passwordController) {
-    
     // Validaciones manuales
     if (nameController.text.isEmpty) {
-      _showAlertDialog(context, 'Campo Obligatorio','El campo nombre es Obligatorio');
+      _showAlertDialog(
+          context, 'Campo Obligatorio', 'El campo nombre es Obligatorio');
       return;
     }
-    if (nameController.text.length<6) {
-      _showAlertDialog(context, 'Nombre Inválido','El campo nombre es demasiado corto, favor ingresar nombre completo');
+    if (nameController.text.length < 6) {
+      _showAlertDialog(context, 'Nombre Inválido',
+          'El campo nombre es demasiado corto, favor ingresar nombre completo');
       return;
     }
     if (!Validators.isValidName(nameController.text)) {
-      _showAlertDialog(context, 'Nombre Inválido','El campo nombre tiene caractéres extraños, favor solo ingresar letras y espacios)');
+      _showAlertDialog(context, 'Nombre Inválido',
+          'El campo nombre tiene caractéres extraños, favor solo ingresar letras y espacios)');
       return;
     }
     if (emailController.text.isEmpty) {
-      _showAlertDialog(context, 'Campo Obligatorio','El campo Correo Electrónico es Obligatorio');
+      _showAlertDialog(context, 'Campo Obligatorio',
+          'El campo Correo Electrónico es Obligatorio');
       return;
     }
     if (!Validators.isValidEmail(emailController.text)) {
-      _showAlertDialog(context, 'Email Inválido','Por favor ingrese un Correo Electrónico válido');
+      _showAlertDialog(context, 'Email Inválido',
+          'Por favor ingrese un Correo Electrónico válido');
       return;
     }
     if (birthdateController.text.isEmpty) {
-      _showAlertDialog(context,'Campo Obligatorio', 'El campo Fecha de Nacimiento es Obligatorio');
+      _showAlertDialog(context, 'Campo Obligatorio',
+          'El campo Fecha de Nacimiento es Obligatorio');
       return;
     }
     if (addressController.text.isEmpty) {
-      _showAlertDialog(context,'Campo Obligatorio', 'El campo Dirección es Obligatorio');
+      _showAlertDialog(
+          context, 'Campo Obligatorio', 'El campo Dirección es Obligatorio');
       return;
     }
     if (passwordController.text.isEmpty) {
-      _showAlertDialog(context,'Campo Obligatorio', 'El campo Contraseña es Obligatorio');
+      _showAlertDialog(
+          context, 'Campo Obligatorio', 'El campo Contraseña es Obligatorio');
       return;
     }
     if (passwordController.text.length < 6) {
-      _showAlertDialog(context,'Contraseña Inválida', 'Por favor ingrese una contraseña de al menos 6 caracteres');
+      _showAlertDialog(context, 'Contraseña Inválida',
+          'Por favor ingrese una contraseña de al menos 6 caracteres');
       return;
     }
 
-    // Si todo es válido
+    // Si todo es válido enviar
     onSubmit(
       nameController.text,
       emailController.text,
@@ -194,4 +223,3 @@ class SignupForm extends StatelessWidget {
     passwordController.clear();
   }
 }
-
