@@ -1,16 +1,23 @@
-# desis_diagnostic_app
+# Desis Diagnostic App
 
-A new Flutter project.
+## Descripción
+Desis Diagnostic App es una aplicación de prueba diseñada para facilitar el registro y manejo de usuarios. Actualmente, es funcional únicamente en dispositivos Android.
 
-## Getting Started
+## Descarga de la APK
+Puedes descargar la última versión de la APK desde el siguiente enlace:
 
-This project is a starting point for a Flutter application.
+[Descargar APK](https://github.com/alexigonzalezzcoloma/desisDiagnosticApp/tree/main/desis_diagnostic_app/apk)
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación
+Para instalar la aplicación en tu dispositivo Android, sigue estos pasos:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Descarga el archivo APK desde el enlace proporcionado.
+2. Abre el archivo APK en tu dispositivo.
+3. Si es la primera vez que instalas una aplicación de esta fuente, es posible que necesites habilitar la opción "Instalar de fuentes desconocidas" en la configuración de seguridad de tu dispositivo.
+4. Sigue las instrucciones en pantalla para completar la instalación.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Capturas de Pantalla
+Consulta las capturas de pantalla de la aplicación en el siguiente enlace:
+
+[Ver Capturas de Pantalla](https://github.com/alexigonzalezzcoloma/desisDiagnosticApp/tree/main/desis_diagnostic_app/screenshots)
+
