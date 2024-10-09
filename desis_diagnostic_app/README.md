@@ -1,10 +1,10 @@
 # Desis Diagnostic App
 
 ## Descripción
-Desis Diagnostic App es una aplicación de prueba diseñada para facilitar el registro y manejo de usuarios. Actualmente, es funcional únicamente en dispositivos Android.
+**Desis Diagnostic App** es una aplicación diseñada para facilitar el registro de usuarios en una base de datos local a través de un formulario con validaciones. Además, permite llenar este formulario utilizando datos de la API disponible en [randomuser.me](https://randomuser.me/api/). Actualmente, la aplicación es funcional únicamente en dispositivos Android.
 
 ## Descarga de la APK
-Puedes descargar la última versión de la APK desde el siguiente enlace:
+Puedes descargar la última versión del APK desde el siguiente enlace:
 
 [Descargar APK](https://github.com/alexigonzalezzcoloma/desisDiagnosticApp/tree/main/desis_diagnostic_app/apk)
 
@@ -17,7 +17,10 @@ Para instalar la aplicación en tu dispositivo Android, sigue estos pasos:
 4. Sigue las instrucciones en pantalla para completar la instalación.
 
 ## Capturas de Pantalla
-Consulta las capturas de pantalla de la aplicación en el siguiente enlace:
+Puedes consultar las capturas de pantalla de la aplicación en el siguiente enlace:
 
 [Ver Capturas de Pantalla](https://github.com/alexigonzalezzcoloma/desisDiagnosticApp/tree/main/desis_diagnostic_app/screenshots)
 
+## Características
+- **Registro de Usuarios**: Permite a los usuarios registrarse con validaciones para asegurar información correcta.
+- **Integración con API**: Rellena automáticamente el formulario con datos de la API de randomuser.me.
